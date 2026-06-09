@@ -3,7 +3,7 @@
     background-color: #fe424d;
     color: #fff;
     border-radius: 25px;
-    padding: 0 1rem 0 1rem;
+    padding: 0 1rem;
   }
   .search-btn:hover {
     background-color: #fe424d;
@@ -15,16 +15,59 @@
   }
   .search-inp {
     border-radius: 20px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
+    padding: 0.5rem 3rem;
     text-align: center;
     font-size: 0.9rem;
   }
+
+  @media (max-width: 768px) {
+    .search-inp {
+      padding: 0.5rem 1rem;
+      text-align: left;
+      max-width: 200px;
+    }
+    .search-btn {
+      padding: 0 0.75rem;
+    }
+    .search-btn span {
+      display: none;
+    }
+
+    #navbarSupportedContent {
+      background-color: #ffffff !important; /* Forces a solid white background */
+      padding: 1rem; /* Adds clean spacing inside the menu wrapper */
+      border-radius: 8px; /* Softens the edges of the dropdown container */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow so it stands out over listings */
+    }
+  }
 </style>
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"
-      ><i class="fa-regular fa-compass"></i
-    ></a>
+
+<nav class="navbar navbar-expand-md bg-white border-bottom sticky-top">
+  <div class="container">
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand me-3" href="/listings">
+        <i class="fa-regular fa-compass"></i>
+      </a>
+      <div class="navbar-nav d-none d-md-flex">
+        <a class="nav-link" href="/listings">Explore</a>
+      </div>
+    </div>
+
+    <div class="mx-auto">
+      <form class="d-flex" role="search" action="/listings/search" method="GET">
+        <input
+          class="form-control me-2 search-inp"
+          type="search"
+          placeholder="Search Destinations"
+          name="q"
+          required
+        />
+        <button class="btn search-btn" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i><span>Search</span>
+        </button>
+      </form>
+    </div>
+
     <button
       class="navbar-toggler"
       type="button"
@@ -34,38 +77,23 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings">Explore</a>
-      </div>
-      <div class="navbar-nav ms-auto">
-        <form
-          class="d-flex"
-          role="search"
-          action="/listings/search"
-          method="GET"
-        >
-          <input
-            class="form-control me-2 search-inp"
-            type="search"
-            placeholder="Search Destinations"
-            name="q"
-            required
-          />
-          <button class="btn search-btn" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>Search
-          </button>
-        </form>
-      </div>
-      <div class="navbar-nav ms-auto">
+    <div
+      class="collapse navbar-collapse flex-grow-0"
+      id="navbarSupportedContent"
+    >
+      <div class="navbar-nav ms-auto mt-3 mt-md-0">
+        <a class="nav-link d-md-none" href="/listings">Explore</a>
+
         <a class="nav-link" href="/listings/new">New Listings</a>
-        <%if(!currUser){%>
+
+        <% if(!currUser) { %>
         <a class="nav-link" href="/signup"><b>Sign Up</b></a>
         <a class="nav-link" href="/login"><b>Log in</b></a>
-        <%}%>
-        <%if(currUser){%>
-        <a class="nav-link" href="/logout">Log out</a>
-        <%}%>
+        <% } %>
+
+        <% if(currUser) { %>
+        <a class="nav-link" href="/logout"><b>Log out</b></a>
+        <% } %>
       </div>
     </div>
   </div>
