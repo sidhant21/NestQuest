@@ -22,29 +22,32 @@
 
   @media (max-width: 768px) {
     .search-inp {
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.75rem;
       text-align: left;
-      max-width: 200px;
+      max-width: 140px;
     }
     .search-btn {
-      padding: 0 0.75rem;
+      padding: 0 0.6rem;
     }
     .search-btn span {
       display: none;
     }
 
     #navbarSupportedContent {
-      background-color: #ffffff !important; /* Forces a solid white background */
-      padding: 1rem; /* Adds clean spacing inside the menu wrapper */
-      border-radius: 8px; /* Softens the edges of the dropdown container */
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow so it stands out over listings */
+      background-color: #ffffff !important;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-top: 0.5rem;
     }
   }
 </style>
 
 <nav class="navbar navbar-expand-md bg-white border-bottom sticky-top">
-  <div class="container">
-    <div class="d-flex align-items-center">
+  <div
+    class="container d-flex flex-wrap flex-md-nowrap align-items-center justify-content-between"
+  >
+    <div class="d-flex align-items-center col-md-4 justify-content-start">
       <a class="navbar-brand me-3" href="/listings">
         <i class="fa-regular fa-compass"></i>
       </a>
@@ -53,7 +56,7 @@
       </div>
     </div>
 
-    <div class="mx-auto">
+    <div class="col-md-4 d-flex justify-content-center my-2 my-md-0">
       <form class="d-flex" role="search" action="/listings/search" method="GET">
         <input
           class="form-control me-2 search-inp"
@@ -68,32 +71,33 @@
       </form>
     </div>
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="col-md-4 d-flex justify-content-end align-items-center">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div
-      class="collapse navbar-collapse flex-grow-0"
-      id="navbarSupportedContent"
-    >
-      <div class="navbar-nav ms-auto mt-3 mt-md-0">
-        <a class="nav-link d-md-none" href="/listings">Explore</a>
+      <div
+        class="collapse navbar-collapse flex-grow-0 w-100"
+        id="navbarSupportedContent"
+      >
+        <div class="navbar-nav text-center ms-md-auto mt-2 mt-md-0">
+          <a class="nav-link d-md-none" href="/listings">Explore</a>
+          <a class="nav-link" href="/listings/new">New Listings</a>
 
-        <a class="nav-link" href="/listings/new">New Listings</a>
+          <% if(!currUser) { %>
+          <a class="nav-link" href="/signup"><b>Sign Up</b></a>
+          <a class="nav-link" href="/login"><b>Log in</b></a>
+          <% } %>
 
-        <% if(!currUser) { %>
-        <a class="nav-link" href="/signup"><b>Sign Up</b></a>
-        <a class="nav-link" href="/login"><b>Log in</b></a>
-        <% } %>
-
-        <% if(currUser) { %>
-        <a class="nav-link" href="/logout"><b>Log out</b></a>
-        <% } %>
+          <% if(currUser) { %>
+          <a class="nav-link" href="/logout"><b>Log out</b></a>
+          <% } %>
+        </div>
       </div>
     </div>
   </div>
